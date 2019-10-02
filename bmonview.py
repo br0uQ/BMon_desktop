@@ -88,14 +88,13 @@ class MonitorPage(GridLayout):
         self.btn_audio = self.ids["btn_audio"]
         self.video_layout = self.ids["video_layout"]
         self.slider_volume = self.ids["slider_volume"]
-        self.volume = self.slider_volume.value
 
-        #sound = SoundLoader.load("http://192.168.2.1:8000/raspi.mp3")
-        #sound.load()
-        #if sound:
-        #    print("Sound found at %s" % sound.source)
-        #    print("Sound is %.3f seconds" % sound.length)
-        #    sound.play()
+        if os.path.isfile("prev_volume.txt"):
+            with open("prev_volume.txt", "r") as f:
+                self.volume = f.read()
+                self.slider_volume.value = self.volume
+        else:
+            self.volume = self.slider_volume.value
 
     def switch_video(self):
         if self.btn_video.text == "Video: off":
@@ -130,5 +129,9 @@ class MonitorPage(GridLayout):
 
     def change_volume(self, *_):
         self.volume = self.slider_volume.value
+
+        with open("prev_volume.txt", "w") as f:
+            f.write(f"{self.volume}")
+
         if self.btn_audio.text == "Audio: on":
             self.sound.volume = self.volume / 10.0
