@@ -70,10 +70,8 @@ class ConnectPage(GridLayout):
 class InfoPage(GridLayout):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.cols = 1
-        self.lbl_message = Label(halign="center", valign="middle", font_size=30)
+        self.lbl_message = self.ids["lbl_message"]
         self.lbl_message.bind(width=self.update_text_width)
-        self.add_widget(self.lbl_message)
 
     def update_info(self, message):
         self.lbl_message.text = message
@@ -85,22 +83,11 @@ class InfoPage(GridLayout):
 class MonitorPage(GridLayout):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.cols = 1
 
-        self.video_layout = AnchorLayout(anchor_x="center")
-        self.add_widget(self.video_layout)
+        self.btn_video = self.ids["btn_video"]
+        self.btn_audio = self.ids["btn_audio"]
+        self.video_layout = self.ids["video_layout"]
 
-        buttons = GridLayout(height=Window.size[1]*0.1, size_hint_y=None)
-        buttons.cols = 2
-
-        self.btn_video = Button(text="Video: off")
-        self.btn_video.bind(on_press=self.switch_video)
-        buttons.add_widget(self.btn_video)
-
-        self.btn_audio = Button(text="Audio: off")
-        self.btn_audio.bind(on_press=self.switch_audio)
-        buttons.add_widget(self.btn_audio)
-        self.add_widget(buttons)
         #sound = SoundLoader.load("http://192.168.2.1:8000/raspi.mp3")
         #sound.load()
         #if sound:
@@ -108,7 +95,7 @@ class MonitorPage(GridLayout):
         #    print("Sound is %.3f seconds" % sound.length)
         #    sound.play()
 
-    def switch_video(self, _):
+    def switch_video(self):
         if self.btn_video.text == "Video: off":
             self.videoViewer = MjpegViewer(url="http://192.168.2.1:8090/")
             self.videoViewer.bind(height=self.update_video_size)
@@ -120,7 +107,7 @@ class MonitorPage(GridLayout):
             self.video_layout.remove_widget(self.videoViewer)
             self.btn_video.text = "Video: off"
 
-    def switch_audio(self, _):
+    def switch_audio(self):
         if self.btn_audio.text == "Audio: off":
 
             self.btn_audio.text = "Audio: on"

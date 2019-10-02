@@ -17,3 +17,32 @@
         cols: 1
         id: elements
         orientation: 'vertical'
+
+<MonitorPage>
+    cols: 1
+
+    AnchorLayout:
+        anchor_x: 'center'
+        id: video_layout
+
+    GridLayout:
+        size_hint_y: 0.1
+        cols: 2
+
+        Button:
+            id: btn_video
+            text: 'Video: off'
+            on_release: root.switch_video()
+
+        Button:
+            id: btn_audio
+            text: 'Audio: off'
+            on_release: root.switch_audio()
+
+<InfoPage>
+    cols: 1
+    Label:
+        id: lbl_message
+        halign: 'center'
+        valign: 'middle'
+        font_size: 30
