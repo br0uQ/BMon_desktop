@@ -91,7 +91,7 @@ class MonitorPage(GridLayout):
 
         if os.path.isfile("prev_volume.txt"):
             with open("prev_volume.txt", "r") as f:
-                self.volume = f.read()
+                self.volume = float(f.read())
                 self.slider_volume.value = self.volume
         else:
             self.volume = self.slider_volume.value
