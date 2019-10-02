@@ -20,10 +20,25 @@
 
 <MonitorPage>
     cols: 1
+    BoxLayout:
+        orientation: 'horizontal'
 
-    AnchorLayout:
-        anchor_x: 'center'
-        id: video_layout
+        AnchorLayout:
+            size_hint_x: 0.9
+            anchor_x: 'center'
+            id: video_layout
+
+        Slider:
+            size_hint_x: 0.1
+            id: slider_volume
+            anchor_x: 'right'
+            orientation: 'vertical'
+            min: 0
+            max: 10
+            step: 1
+            value: 10
+            padding: 100
+            on_touch_move: root.change_volume()
 
     GridLayout:
         size_hint_y: 0.1
