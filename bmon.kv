@@ -1,0 +1,19 @@
+<ConnectPage>
+    cols: 1
+    ActionBar:
+        size_hint_y: 0.1
+        ActionView:
+            use_separator: True
+            ActionPrevious:
+                title: 'Bmon Montoring'
+                with_previous: False
+            ActionOverflow:
+            ActionButton:
+                important: True
+                text: 'New'
+                on_release: root.new_element()
+    GridLayout:
+        size_hint_y: 0.9
+        cols: 1
+        id: elements
+        orientation: 'vertical'

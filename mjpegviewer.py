@@ -27,6 +27,8 @@ class MjpegViewer(Image):
         self._thread.start()
         self._image_lock = threading.Lock()
         self._image_buffer = None
+        self.source = "loading.png"
+        Clock.max_iteration = 60
         self._event = Clock.schedule_interval(self.update_image, 1 / 30.)
 
     def stop(self):
